@@ -34,12 +34,12 @@ public class CourseController {
     }
 
     @GetMapping()
-    public ResponseEntity getMethodName() {
+    public ResponseEntity getCourse() {
         return ResponseEntity.ok(repo.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getMethodName(@PathVariable Long id) {
+    public ResponseEntity getCourse(@PathVariable Long id) {
         Optional<Course> foundCourse = repo.findById(id); 
         if(foundCourse.isPresent()){
         return ResponseEntity.ok(foundCourse.get());
@@ -48,21 +48,26 @@ public class CourseController {
     }
     
     @PostMapping()
-    public ResponseEntity<Course> postMethodName(@RequestBody @Validated Course course) {
+    public ResponseEntity<Course> postCourse(@RequestBody @Validated Course course) {
         repo.save(course);
         return ResponseEntity.ok(course);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<String> putMethodName(@PathVariable String id, @RequestBody Course course) {
-        return ResponseEntity.ok("");
+    public ResponseEntity putCourse(@PathVariable Long id, @RequestBody Course course) {
+        if(repo.existsById(id)){
+            Course courseToUpdate = repo.findById(id).get();
+            courseToUpdate = course;
+            repo.save(courseToUpdate);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMethodName(@PathVariable Long id) {
-        Optional<Course> foundCourse = repo.findById(id); 
-        if(foundCourse.isPresent()){
-            repo.delete(foundCourse.get());
+    public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
+        if(repo.existsById(id)){
+            repo.deleteById(id);
             return ResponseEntity.ok("{\"Result\":\"Course Deleted\"}");
         }
         return ResponseEntity.notFound().build();

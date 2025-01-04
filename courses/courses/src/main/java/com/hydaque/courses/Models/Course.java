@@ -12,12 +12,12 @@ import org.springframework.data.annotation.Id;
 @Document(collection = "CoursesCollection")
 
 public class Course {
-    @Id Long id;
-    String title;
-    String description;
-    Date createdDate;
-    CourseStatus courseStatus;
-    CourseCategory category;
+    @Id private Long id;
+    private String title;
+    private String description;
+    private Date createdDate;
+    private CourseStatus courseStatus;
+    private CourseCategory category;
 
 
     public Course(Long id, String title, String description, Date createdDate, CourseStatus courseStatus, CourseCategory category) {
