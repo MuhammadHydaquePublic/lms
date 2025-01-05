@@ -28,9 +28,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class CourseController {
     @Autowired
     private final CourseRepository repo;
+    private final KafkaProducerService kafkaService;
 
-    public CourseController(CourseRepository repo){
+    public CourseController(CourseRepository repo, KafkaProducerService kafkaService){
         this.repo = repo;
+        this.kafkaService = kafkaService;
     }
 
     @GetMapping()
@@ -50,6 +52,7 @@ public class CourseController {
     @PostMapping()
     public ResponseEntity<Course> postCourse(@RequestBody @Validated Course course) {
         repo.save(course);
+        kafkaService.sendMessage("courses", "{\"CourseCreated\":"+course.getId()+"}");
         return ResponseEntity.ok(course);
     }
     
