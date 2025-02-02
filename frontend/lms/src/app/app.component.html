@@ -331,6 +331,10 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+<button>New Course</button>
+@for (item of Courses; track item.title) {
+  <span>{{ item.title }}</span><sub>{{item.category.catName}}</sub>
+  <p>{{item.description}}</p>
+  }
 
 <router-outlet />
