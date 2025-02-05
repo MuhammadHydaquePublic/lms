@@ -8,9 +8,9 @@ public class AuthService : IAuthService
 {
     IUtilityService utilityService;
     AppDbContext dbContext;
-    public AuthService(IServiceScopeFactory scopeFactory,IConfiguration configuration){
+    public AuthService(IServiceScopeFactory scopeFactory,IUtilityService utilityService){
         this.dbContext = scopeFactory.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
-        utilityService = new UtilityService(configuration);
+        this.utilityService = utilityService;
     }
     public async Task<IResult> loginAsync(LoginDto loginDto)
     {
@@ -30,18 +30,7 @@ public class AuthService : IAuthService
         {
             return Results.BadRequest("User already exists");
         }
-
-        var user = new User
-        {
-            fullName = userDto.fullName,
-            email = userDto.email,
-            mobile = userDto.mobile,
-            username = userDto.username,
-            password = utilityService.HashPassword(userDto.Password),
-            createdDate = DateTime.UtcNow,
-        };
         
-        dbContext.Users.Add(user);
         await dbContext.SaveChangesAsync();
         return Results.Ok("User registered successfully");
     }
