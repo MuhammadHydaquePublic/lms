@@ -37,7 +37,7 @@ namespace auth.Migrations
 
                     b.Property<string>("email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("fullName")
                         .IsRequired()
@@ -51,6 +51,11 @@ namespace auth.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("user_type")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<string>("username")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -58,7 +63,50 @@ namespace auth.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("email", "username")
+                        .IsUnique();
+
                     b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("user_type").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Admin", b =>
+                {
+                    b.HasBaseType("User");
+
+                    b.Property<string>("credsToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("admin");
+                });
+
+            modelBuilder.Entity("Student", b =>
+                {
+                    b.HasBaseType("User");
+
+                    b.Property<string>("studentCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("student");
+                });
+
+            modelBuilder.Entity("Teacher", b =>
+                {
+                    b.HasBaseType("User");
+
+                    b.Property<int>("GraduationYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Major")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("teacher");
                 });
 #pragma warning restore 612, 618
         }

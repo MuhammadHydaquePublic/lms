@@ -46,7 +46,9 @@ builder.Services.AddAuthorization();
 
 // Register custom middleware
 builder.Services.AddScoped<IRoutingService, RoutingService>();
-builder.Services.AddScoped<IRoutingService, RoutingService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddTransient<IUtilityService, UtilityService>();
+
 
 var app = builder.Build();
 

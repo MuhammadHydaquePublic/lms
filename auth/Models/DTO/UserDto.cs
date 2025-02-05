@@ -5,3 +5,14 @@ public class UserDto{
     public String Password { get; set; }
     public String mobile { get; set; }
 }
+public class TeacherDto : UserDto{
+    public int GraduationYear { get; set; }
+    public String Major { get; set; }
+}
+public class StudentDto : UserDto{
+    public String studentCode { get; set; }
+}
+
+public class AdminDto : UserDto{
+    public String credsToken { get; set; }
+}

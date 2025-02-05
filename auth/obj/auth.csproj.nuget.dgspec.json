@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\lms\\lms\\auth\\auth.csproj": {}
+    "d:\\lms\\lms\\auth\\auth.csproj": {}
   },
   "projects": {
-    "D:\\lms\\lms\\auth\\auth.csproj": {
+    "d:\\lms\\lms\\auth\\auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\lms\\lms\\auth\\auth.csproj",
+        "projectUniqueName": "d:\\lms\\lms\\auth\\auth.csproj",
         "projectName": "auth",
-        "projectPath": "D:\\lms\\lms\\auth\\auth.csproj",
+        "projectPath": "d:\\lms\\lms\\auth\\auth.csproj",
         "packagesPath": "C:\\Users\\muhammad.hydaque\\.nuget\\packages\\",
-        "outputPath": "D:\\lms\\lms\\auth\\obj\\",
+        "outputPath": "d:\\lms\\lms\\auth\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -21,7 +21,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -29,8 +29,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -43,11 +43,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -101,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

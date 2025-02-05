@@ -30,7 +30,22 @@ public class AuthService : IAuthService
         {
             return Results.BadRequest("User already exists");
         }
-        
+        UserFactory userFactory = new UserFactory(utilityService);
+        var user = userFactory.CreateUser(userDto);
+        String userTypeName = user.GetType().Name;
+        switch(userTypeName){
+            case "Teacher":
+                dbContext.Teachers.Add((Teacher)user);
+                break;
+            case "Student":
+                dbContext.Students.Add((Student)user);
+                break;
+            case "Admin":
+                dbContext.Admins.Add((Admin)user);
+                break;
+            default:
+            break;
+        }
         await dbContext.SaveChangesAsync();
         return Results.Ok("User registered successfully");
     }

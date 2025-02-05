@@ -19,3 +19,15 @@ public class User{
     public int createdByUserId { get; set; }
     
 }
+
+public class Teacher : User{
+    public String Major { get; set; }
+    [Range(1900,2024)]
+    public int GraduationYear { get; set; }
+}
+public class Student : User{
+    public String studentCode { get; set; }
+}
+public class Admin : User{
+    public String credsToken { get; set; }
+}
