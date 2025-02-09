@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IRoutingService, RoutingService>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddTransient<IUtilityService, UtilityService>();
-
 
 var app = builder.Build();
 

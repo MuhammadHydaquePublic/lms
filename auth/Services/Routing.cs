@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 public interface IRoutingService{
 
@@ -27,6 +28,11 @@ public class RoutingService : IRoutingService{
         app.MapPost("/login", async ([FromBody] LoginDto loginDto) =>
         {
             return await authService.loginAsync(loginDto);
+        });
+        
+        app.MapGet("/.well-known/jwks.json", async () =>
+        {
+            return await authService.publicKeyFetch();
         });
     }
 }

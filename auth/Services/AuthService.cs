@@ -1,8 +1,10 @@
+using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 
 public interface IAuthService{
     Task<IResult> loginAsync(LoginDto loginDto);
     Task<IResult> RegisterAsync(UserDto userDto);
+    Task<IResult> publicKeyFetch();
 }
 public class AuthService : IAuthService
 {
@@ -22,6 +24,33 @@ public class AuthService : IAuthService
 
         var token = utilityService.GenerateJwtToken(user);
         return Results.Ok(new { Token = token });
+    }
+
+    public async Task<IResult> publicKeyFetch()
+    {
+        RSA rsa = RSA.Create(2048);
+        var publicKey = rsa.ExportRSAPublicKey();
+
+        rsa.ImportRSAPublicKey(publicKey, out _);
+        var parameters = rsa.ExportParameters(false);
+
+        var jwks = new
+        {
+            keys = new[]
+            {
+                new
+                {
+                    kty = "RSA",
+                    use = "sig", // "sig" for signature
+                    kid = "your-key-id", // Unique key ID
+                    n = utilityService.Base64UrlEncode(parameters.Modulus), // Modulus
+                    e = utilityService.Base64UrlEncode(parameters.Exponent), // Exponent
+                    alg = "RS256" // Algorithm
+                }
+            }
+        };
+
+        return Results.Ok(jwks);
     }
 
     public async Task<IResult> RegisterAsync(UserDto userDto)
