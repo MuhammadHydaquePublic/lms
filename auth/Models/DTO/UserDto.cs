@@ -1,3 +1,5 @@
+using System;
+
 public class UserDto{
     public String fullName { get; set; }
     public String email { get; set; }

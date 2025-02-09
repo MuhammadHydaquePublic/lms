@@ -1,5 +1,9 @@
+using System;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 public interface IAuthService{
     Task<IResult> loginAsync(LoginDto loginDto);
